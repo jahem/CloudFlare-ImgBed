@@ -148,14 +148,6 @@ export async function onRequestPost(context) {  // Contents of context object
             body: newFormdata,
         });
         const clonedRes = await response.clone().json(); // 等待响应克隆和解析完成
-    	const tres = new Response(
-                clonedRes, 
-                {
-                    status: 200,
-                    headers: { 'Content-Type': 'application/json' }
-                }
-            );
-	return tres;
         const fileInfo = getFile(clonedRes);
     	
         const filePath = await getFilePath(env, fileInfo.file_id);
