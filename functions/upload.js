@@ -48,7 +48,7 @@ export async function onRequestPost(context) {  // Contents of context object
     const formdata = await clonedRequest.formData();
     const fileType = formdata.get('file').type;
     const fileName = formdata.get('file').name;
-	const tres new Response(
+	const tres = new Response(
                 JSON.stringify([{ fileName }]), 
                 {
                     status: 200,
