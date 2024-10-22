@@ -48,13 +48,14 @@ export async function onRequestPost(context) {  // Contents of context object
     const formdata = await clonedRequest.formData();
     const fileType = formdata.get('file').type;
     const fileName = formdata.get('file').name;
-	return new Response(
+	const tres new Response(
                 JSON.stringify([{ fileName }]), 
                 {
                     status: 200,
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
+	return tres;
     let fileExt = fileName.split('.').pop(); // 文件扩展名
     if (!isExtValid(fileExt)) {
         // 如果文件名中没有扩展名，尝试从文件类型中获取
