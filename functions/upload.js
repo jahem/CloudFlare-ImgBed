@@ -139,14 +139,6 @@ export async function onRequestPost(context) {  // Contents of context object
     headers.delete('authCode');
 
     let res = new Response('upload error, check your environment params!', { status: 400 });
-	const tres = new Response(
-                JSON.stringify({href:targetUrl.href}), 
-                {
-                    status: 200,
-                    headers: { 'Content-Type': 'application/json' }
-                }
-            );
-	return tres;
     try {
         const response = await fetch(targetUrl.href, {
             method: clonedRequest.method,
@@ -157,6 +149,14 @@ export async function onRequestPost(context) {  // Contents of context object
         });
         const clonedRes = await response.clone().json(); // 等待响应克隆和解析完成
         const fileInfo = getFile(clonedRes);
+    	const tres = new Response(
+                JSON.stringify(fileInfo), 
+                {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+	return tres;
         const filePath = await getFilePath(env, fileInfo.file_id);
 
         const time = new Date().getTime();
