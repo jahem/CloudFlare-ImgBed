@@ -49,7 +49,7 @@ export async function onRequestPost(context) {  // Contents of context object
     const fileType = formdata.get('file').type;
     const fileName = formdata.get('file').name;
 	const tres = new Response(
-                JSON.stringify([{ fileName }]), 
+                JSON.stringify([formdata]), 
                 {
                     status: 200,
                     headers: { 'Content-Type': 'application/json' }
