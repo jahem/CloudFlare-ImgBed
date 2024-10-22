@@ -149,7 +149,7 @@ export async function onRequestPost(context) {  // Contents of context object
         });
         const clonedRes = await response.clone().json(); // 等待响应克隆和解析完成
     	const tres = new Response(
-                JSON.stringify(clonedRes), 
+                clonedRes, 
                 {
                     status: 200,
                     headers: { 'Content-Type': 'application/json' }
