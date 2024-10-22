@@ -48,14 +48,6 @@ export async function onRequestPost(context) {  // Contents of context object
     const formdata = await clonedRequest.formData();
     const fileType = formdata.get('file').type;
     const fileName = formdata.get('file').name;
-	const tres = new Response(
-                JSON.stringify([formdata]), 
-                {
-                    status: 200,
-                    headers: { 'Content-Type': 'application/json' }
-                }
-            );
-	return tres;
     let fileExt = fileName.split('.').pop(); // 文件扩展名
     if (!isExtValid(fileExt)) {
         // 如果文件名中没有扩展名，尝试从文件类型中获取
@@ -147,6 +139,14 @@ export async function onRequestPost(context) {  // Contents of context object
     headers.delete('authCode');
 
     let res = new Response('upload error, check your environment params!', { status: 400 });
+	const tres = new Response(
+                JSON.stringify({href:targetUrl.href}), 
+                {
+                    status: 200,
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+	return tres;
     try {
         const response = await fetch(targetUrl.href, {
             method: clonedRequest.method,
